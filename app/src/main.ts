@@ -2,7 +2,7 @@ import cors from "cors";
 import helmet from "helmet";
 import express, { Application } from "express";
 import * as driver from "./driver";
-import { router } from "./routes";
+import { router as apiRouter } from "./routes";
 import { logger } from "./utils/logger";
 import { debug } from "./middlewares/debug";
 
@@ -33,7 +33,7 @@ async function main(): Promise<void> {
   }
 
   // Api routing
-  app.use("/api", router);
+  app.use("/api", apiRouter);
 
   // Start the server
   app.listen(8000, () => logger.info("app is running"));

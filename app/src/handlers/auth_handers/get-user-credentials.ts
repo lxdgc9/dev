@@ -19,7 +19,7 @@ async function getUserCredentials(
       throw new Error("user not found");
     }
 
-    // Ok
+    // Ok, send user credentials
     res.status(200).json({
       status: true,
       message: "Get user credentials success",

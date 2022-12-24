@@ -41,8 +41,8 @@ async function createUser(
     });
 
     // Save
-    await newProfile.save();
     await newUser.save();
+    await newProfile.save();
 
     // Ok, send response
     res.status(201).json({
