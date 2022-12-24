@@ -24,9 +24,14 @@ async function login(
       throw new Error("wrong password");
     }
 
-    // Ok
+    // Ok, create token and send response
     const token = jwt.sign(
-      { id: user.id } as JwtPayload,
+      {
+        id: user.id,
+        profileId: user.profileId,
+        roleId: user.roleId,
+        isActive: user.isActive,
+      } as JwtPayload,
       process.env.SECRET_KEY as string,
       { expiresIn: "2d" }
     );

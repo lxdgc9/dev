@@ -1,0 +1,6 @@
+const PERMISSION_CODE = {
+  CREATE_USER: 1,
+  GET_USER: 2,
+};
+
+export { PERMISSION_CODE };

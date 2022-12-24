@@ -1,9 +1,5 @@
 import mongoose from "mongoose";
-
-enum Gender {
-  male = "male",
-  female = "female",
-}
+import { Gender } from "../../@types/gender";
 
 interface IProfile {
   name: string;

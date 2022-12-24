@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import { IPosition } from "./interfaces/position";
 
 const positionSchema = new mongoose.Schema<IPosition>({
-  label: {
+  name: {
     type: String,
     trim: true,
     required: true,

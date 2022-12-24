@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 interface IPosition {
-  label: string;
+  name: string;
   companyId: mongoose.Types.ObjectId;
 }
 
