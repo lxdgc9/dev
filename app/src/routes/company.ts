@@ -1,11 +1,10 @@
 import express from "express";
+import * as companyHandler from "../handlers/company_handlers";
 
 const companyRouter = express.Router();
 
-companyRouter.get("/");
-companyRouter.get("/:id");
-companyRouter.post("/");
-companyRouter.put("/:id");
-companyRouter.delete("/:id");
+companyRouter.get("/", companyHandler.getCompanyList);
+companyRouter.get("/:id", companyHandler.getCompanyById);
+companyRouter.post("/", companyHandler.createCompany);
 
 export { companyRouter };
