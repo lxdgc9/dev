@@ -55,7 +55,7 @@ async function createUser(
     console.log(err);
     res.status(400).json({
       status: false,
-      message: "Create user failed",
+      message: "Create User Failed",
     });
   }
 }

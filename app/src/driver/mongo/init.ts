@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-function init(): void {
+function init() {
   mongoose.set("strictQuery", true);
   mongoose.set("toJSON", {
     virtuals: true,

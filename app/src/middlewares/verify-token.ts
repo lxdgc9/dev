@@ -8,9 +8,9 @@ function verifyToken(
   req: RequestWithUser,
   res: express.Response,
   next: express.NextFunction
-): void {
+) {
   try {
-    const headerAssertion = req.header("Authorization") as string;
+    const headerAssertion = req.header("authorization") as string;
     if (!headerAssertion) {
       throw new Error("no authorization header");
     }
@@ -26,7 +26,7 @@ function verifyToken(
     console.log(err);
     res.status(403).json({
       status: false,
-      message: "Invalid token",
+      message: "Invalid Token",
     });
   }
 }

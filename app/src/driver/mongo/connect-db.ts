@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { logger } from "../utils/logger";
+import { logger } from "../../utils/logger";
 
 function connectDb(
   host: string,
@@ -7,7 +7,7 @@ function connectDb(
   db: string,
   username: string,
   password: string
-): void {
+) {
   mongoose
     .connect(`mongodb://${host}:${port}/${db}`, {
       authSource: "admin",
@@ -16,9 +16,9 @@ function connectDb(
         password,
       },
     })
-    .then(() => logger.info("connected to db success"))
+    .then(() => logger.info("Connect to MongoDb success"))
     .catch((err) => {
-      logger.error("connect to db failed");
+      logger.error("Connect to MongoDb failed");
       console.log(err);
     });
 }

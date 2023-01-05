@@ -7,14 +7,14 @@ import { positionRouter } from "./position";
 import { roleRouter } from "./role";
 import { userRouter } from "./user";
 
-const router = express.Router();
+const apiRouter = express.Router();
 
-router.use("/auth", authRouter);
-router.use("/permissions", permissionRouter);
-router.use("/roles", roleRouter);
-router.use("/grant-permission", grantPermissionRouter);
-router.use("/users", userRouter);
-router.use("/companies", companyRouter);
-router.use("/positions", positionRouter);
+apiRouter.use("/auth", authRouter);
+apiRouter.use("/permissions", permissionRouter);
+apiRouter.use("/roles", roleRouter);
+apiRouter.use("/grant-permission", grantPermissionRouter);
+apiRouter.use("/users", userRouter);
+apiRouter.use("/companies", companyRouter);
+apiRouter.use("/positions", positionRouter);
 
-export { router };
+export { apiRouter };

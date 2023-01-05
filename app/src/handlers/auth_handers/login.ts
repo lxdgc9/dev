@@ -46,7 +46,7 @@ async function login(
     console.log(err);
     res.status(403).json({
       status: false,
-      message: "Login failed",
+      message: "Login Failed",
     });
   }
 }
