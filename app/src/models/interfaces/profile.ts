@@ -1,11 +1,10 @@
-import mongoose from "mongoose";
-import { Gender } from "../../@types/gender";
+import { Types } from "mongoose";
 
 interface IProfile {
   name: string;
   dob: Date;
-  gender: Gender;
-  positionId: mongoose.Types.ObjectId;
+  gender: "male" | "female";
+  position: Types.ObjectId;
   phone: string;
   avatar: string;
 }

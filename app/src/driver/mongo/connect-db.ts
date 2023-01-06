@@ -11,10 +11,7 @@ function connectDb(
   mongoose
     .connect(`mongodb://${host}:${port}/${db}`, {
       authSource: "admin",
-      auth: {
-        username,
-        password,
-      },
+      auth: { username, password },
     })
     .then(() => logger.info("Connect to MongoDb success"))
     .catch((err) => {

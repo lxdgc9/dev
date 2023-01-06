@@ -1,7 +1,7 @@
-import express from "express";
+import { Request } from "express";
 import { JwtPayload } from "./jwt-payload";
 
-type RequestWithUser = express.Request & {
+type RequestWithUser = Request & {
   user?: JwtPayload;
 };
 

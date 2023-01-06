@@ -1,22 +1,24 @@
-import mongoose from "mongoose";
+import { Schema, model } from "mongoose";
 import { IPosition } from "./interfaces/position";
 
-const positionSchema = new mongoose.Schema<IPosition>({
-  name: {
-    type: String,
-    trim: true,
-    required: true,
+// Define schema
+const schema = new Schema<IPosition>(
+  {
+    name: {
+      type: String,
+      trim: true,
+      required: true,
+    },
+    company: {
+      type: Schema.Types.ObjectId,
+      ref: "company",
+      required: true,
+    },
   },
-  companyId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Company",
-    required: true,
-  },
-});
-
-const PositionModel = mongoose.model<IPosition & mongoose.Document>(
-  "Position",
-  positionSchema
+  { collection: "Position", timestamps: true }
 );
+
+// Create model
+const PositionModel = model("position", schema);
 
 export { PositionModel };

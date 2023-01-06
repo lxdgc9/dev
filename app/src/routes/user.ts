@@ -1,8 +1,8 @@
-import express from "express";
-import * as userHandler from "../handlers/user_handlers";
+import { Router } from "express";
+import { createUser } from "../handlers/user_handlers";
 
-const userRouter = express.Router();
+const router = Router();
 
-userRouter.post("/", userHandler.createUser);
+router.post("/", createUser);
 
-export { userRouter };
+export { router as userRouter };

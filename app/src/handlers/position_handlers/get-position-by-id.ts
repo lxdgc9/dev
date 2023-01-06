@@ -1,24 +1,21 @@
-import express from "express";
+import { Request, Response } from "express";
 import { PositionModel } from "../../models/position-model";
 import { logger } from "../../utils/logger";
 
-async function getPositionById(
-  req: express.Request,
-  res: express.Response
-): Promise<void> {
+async function getPositionById(req: Request, res: Response) {
   try {
     const position = await PositionModel.findById(req.params.id);
     res.status(200).json({
       status: true,
-      message: "Get position by id success",
+      message: "Get Position Success",
       position,
     });
   } catch (err) {
-    logger.error("get position by id error");
+    logger.error("Get position by id error");
     console.log(err);
     res.status(400).json({
       status: false,
-      message: "Get position by id failed",
+      message: "Get Position Failed",
     });
   }
 }

@@ -1,12 +1,12 @@
-import express from "express";
-import * as grantPermissionHandler from "../handlers/grant_permission_handlers";
+import { Router } from "express";
+import {
+  getPermissionsOfRole,
+  grantPermissionForRole,
+} from "../handlers/grant_permission_handlers";
 
-const grantPermissionRouter = express.Router();
+const router = Router();
 
-grantPermissionRouter.get(
-  "/:roleId",
-  grantPermissionHandler.getPermissionsOfRole
-);
-grantPermissionRouter.post("/", grantPermissionHandler.grantPermissionForRole);
+router.get("/:roleId", getPermissionsOfRole);
+router.post("/", grantPermissionForRole);
 
-export { grantPermissionRouter };
+export { router as grantPermissionRouter };

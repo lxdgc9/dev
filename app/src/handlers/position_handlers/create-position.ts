@@ -1,15 +1,12 @@
-import express from "express";
+import { Request, Response } from "express";
 import { CreatePositionDto } from "../../dtos/position/create-position-dto";
 import { PositionModel } from "../../models/position-model";
 import { logger } from "../../utils/logger";
 
-async function createPosition(
-  req: express.Request,
-  res: express.Response
-): Promise<void> {
-  try {
-    const { name, companyId }: CreatePositionDto = req.body;
+async function createPosition(req: Request, res: Response) {
+  const { name, companyId }: CreatePositionDto = req.body;
 
+  try {
     // Create new company
     const newPosition = new PositionModel({ name, companyId });
     await newPosition.save();

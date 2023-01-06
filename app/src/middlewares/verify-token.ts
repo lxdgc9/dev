@@ -12,7 +12,7 @@ function verifyToken(
   try {
     const headerAssertion = req.header("authorization") as string;
     if (!headerAssertion) {
-      throw new Error("no authorization header");
+      throw new Error("No authorization header");
     }
     const token = headerAssertion.split("Bearer ")[1];
     const decoded = jwt.verify(
@@ -22,7 +22,7 @@ function verifyToken(
     req.user = decoded;
     next();
   } catch (err) {
-    logger.error("verify token error");
+    logger.error("Verify token error");
     console.log(err);
     res.status(403).json({
       status: false,

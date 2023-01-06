@@ -27,7 +27,7 @@ function accessRole(...permissions: number[]) {
       console.log(permissions);
       next();
     } catch (err) {
-      logger.error("access role error");
+      logger.error("Access role error");
       console.log(err);
       res.status(401).json({
         status: false,

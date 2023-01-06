@@ -1,21 +1,23 @@
-import mongoose from "mongoose";
+import { Schema, model } from "mongoose";
 import { ICompany } from "./interfaces/company";
 
-const companySchema = new mongoose.Schema<ICompany>({
-  name: {
-    type: String,
-    trim: true,
-    required: true,
+// Define schema
+const schema = new Schema<ICompany>(
+  {
+    name: {
+      type: String,
+      trim: true,
+      required: true,
+    },
+    logo: {
+      type: String,
+      required: true,
+    },
   },
-  logo: {
-    type: String,
-    required: true,
-  },
-});
-
-const CompanyModel = mongoose.model<ICompany & mongoose.Document>(
-  "Company",
-  companySchema
+  { collection: "Company", timestamps: true }
 );
+
+// Create model
+const CompanyModel = model("company", schema);
 
 export { CompanyModel };

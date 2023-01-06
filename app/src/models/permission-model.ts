@@ -1,22 +1,24 @@
-import mongoose from "mongoose";
+import { Schema, model } from "mongoose";
 import { IPermission } from "./interfaces/permission";
 
-const permissionSchema = new mongoose.Schema<IPermission>({
-  name: {
-    type: String,
-    trim: true,
-    required: true,
+// Define schema
+const schema = new Schema<IPermission>(
+  {
+    name: {
+      type: String,
+      trim: true,
+      required: true,
+    },
+    code: {
+      type: Number,
+      unique: true,
+      required: true,
+    },
   },
-  code: {
-    type: Number,
-    unique: true,
-    required: true,
-  },
-});
-
-const PermissionModel = mongoose.model<IPermission & mongoose.Document>(
-  "Permission",
-  permissionSchema
+  { collection: "Permission", timestamps: true }
 );
+
+// Create model
+const PermissionModel = model("permission", schema);
 
 export { PermissionModel };

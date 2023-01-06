@@ -1,15 +1,12 @@
-import express from "express";
+import { Request, Response } from "express";
 import { CreatePermissionDto } from "../../dtos/permission/create-permission-dto";
 import { PermissionModel } from "../../models/permission-model";
 import { logger } from "../../utils/logger";
 
-async function createPermission(
-  req: express.Request,
-  res: express.Response
-): Promise<void> {
-  try {
-    const { name, code }: CreatePermissionDto = req.body;
+async function createPermission(req: Request, res: Response) {
+  const { name, code }: CreatePermissionDto = req.body;
 
+  try {
     // Create new permission
     const newPermission = new PermissionModel({ name, code });
     await newPermission.save();
@@ -17,15 +14,15 @@ async function createPermission(
     // Ok, send response
     res.status(201).json({
       status: true,
-      message: "Create permission success",
+      message: "Create Permission Success",
       permission: newPermission,
     });
   } catch (err) {
-    logger.error("create permission error");
+    logger.error("Create permission error");
     console.log(err);
     res.status(400).json({
       status: false,
-      message: "Create permission failed",
+      message: "Create Permission Failed",
     });
   }
 }

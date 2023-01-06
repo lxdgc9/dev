@@ -1,24 +1,21 @@
-import express from "express";
+import { Request, Response } from "express";
 import { PermissionModel } from "../../models/permission-model";
 import { logger } from "../../utils/logger";
 
-async function getPermissionList(
-  _req: express.Request,
-  res: express.Response
-): Promise<void> {
+async function getPermissionList(_req: Request, res: Response) {
   try {
     const permissionList = await PermissionModel.find({});
     res.status(200).json({
       status: true,
-      message: "Get permission list success",
+      message: "Get Permission List Success",
       permissionList,
     });
   } catch (err) {
-    logger.error("get permission list error");
+    logger.error("Get permission list error");
     console.log(err);
     res.status(404).json({
       status: false,
-      message: "Get permission list failed",
+      message: "Get Permission List Failed",
     });
   }
 }

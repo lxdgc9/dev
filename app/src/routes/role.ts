@@ -1,10 +1,14 @@
-import express from "express";
-import * as roleHandler from "../handlers/role_handlers";
+import { Router } from "express";
+import {
+  getRoleList,
+  getRoleById,
+  createRole,
+} from "../handlers/role_handlers";
 
-const roleRouter = express.Router();
+const router = Router();
 
-roleRouter.get("/", roleHandler.getRoleList);
-roleRouter.get("/:id", roleHandler.getRoleById);
-roleRouter.post("/", roleHandler.createRole);
+router.get("/", getRoleList);
+router.get("/:id", getRoleById);
+router.post("/", createRole);
 
-export { roleRouter };
+export { router as roleRouter };

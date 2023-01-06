@@ -1,4 +1,4 @@
-import express from "express";
+import { Request, Response } from "express";
 import { CreateUserDto } from "../../dtos/user/create-user-dto";
 import { CompanyModel } from "../../models/company-model";
 import { PositionModel } from "../../models/position-model";
@@ -6,10 +6,7 @@ import { ProfileModel } from "../../models/profile-model";
 import { UserModel } from "../../models/user-model";
 import { logger } from "../../utils/logger";
 
-async function createUser(
-  req: express.Request,
-  res: express.Response
-): Promise<void> {
+async function createUser(req: Request, res: Response) {
   try {
     const { username, password, profile, roleId, isActive }: CreateUserDto =
       req.body;
@@ -19,9 +16,9 @@ async function createUser(
     if (!avatar) {
       const position = await PositionModel.findById(positionId);
       if (!position) {
-        throw new Error("invalid position");
+        throw new Error("Invalid position");
       }
-      const company = await CompanyModel.findById(position.companyId);
+      const company = await CompanyModel.findById(position.company);
       avatar = company ? company.logo : "/default-logo.png";
     }
     const newProfile = new ProfileModel({
@@ -47,11 +44,11 @@ async function createUser(
     // Ok, send response
     res.status(201).json({
       status: true,
-      message: "Create user success",
+      message: "Create User Success",
       user: newUser,
     });
   } catch (err) {
-    logger.error("create user error");
+    logger.error("Create user error");
     console.log(err);
     res.status(400).json({
       status: false,

@@ -1,14 +1,10 @@
-import express from "express";
+import { Router } from "express";
 import { verifyToken } from "../middlewares/verify-token";
-import * as authHandler from "../handlers/auth_handers";
+import { getUserCredentials, login } from "../handlers/auth_handers";
 
-const authRouter = express.Router();
+const router = Router();
 
-authRouter.get(
-  "/user-credentials",
-  verifyToken,
-  authHandler.getUserCredentials
-);
-authRouter.post("/login", authHandler.login);
+router.get("/user-credentials", verifyToken, getUserCredentials);
+router.post("/login", login);
 
-export { authRouter };
+export { router as authRouter };

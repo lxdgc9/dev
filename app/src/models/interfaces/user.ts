@@ -1,10 +1,10 @@
-import mongoose from "mongoose";
+import { Types } from "mongoose";
 
 interface IUser {
   username: string;
   password: string;
-  profileId: mongoose.Types.ObjectId;
-  roleId: mongoose.Types.ObjectId;
+  profile: Types.ObjectId;
+  role: Types.ObjectId;
   isActive: boolean;
 
   comparePassword: comparePasswordFunction;

@@ -1,8 +1,8 @@
-import mongoose from "mongoose";
+import { Types } from "mongoose";
 
 interface IPosition {
   name: string;
-  companyId: mongoose.Types.ObjectId;
+  company: Types.ObjectId;
 }
 
 export { IPosition };

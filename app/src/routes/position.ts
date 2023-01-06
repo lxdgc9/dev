@@ -1,10 +1,14 @@
-import express from "express";
-import * as positionHandler from "../handlers/position_handlers";
+import { Router } from "express";
+import {
+  getPositonList,
+  getPositionById,
+  createPosition,
+} from "../handlers/position_handlers";
 
-const positionRouter = express.Router();
+const router = Router();
 
-positionRouter.get("/", positionHandler.getPositonList);
-positionRouter.get("/:id", positionHandler.getPositionById);
-positionRouter.post("/", positionHandler.createPosition);
+router.get("/", getPositonList);
+router.get("/:id", getPositionById);
+router.post("/", createPosition);
 
-export { positionRouter };
+export { router as positionRouter };

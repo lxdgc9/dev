@@ -8,14 +8,14 @@ const consoleTransport = new winston.transports.Console({
   format: format.combine(format.colorize(), format.simple()),
 });
 
-const dailyRotateFileTransport = new DailyRotateFile({
+const fileTransport = new DailyRotateFile({
   filename: FILENAME,
   dirname: DIRNAME,
 });
 
 const logger = winston.createLogger({
   level: "debug",
-  transports: [consoleTransport, dailyRotateFileTransport],
+  transports: [consoleTransport, fileTransport],
 });
 
 export { logger };

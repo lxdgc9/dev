@@ -1,9 +1,9 @@
-import mongoose from "mongoose";
+import { Types } from "mongoose";
 
 type JwtPayload = {
-  id: mongoose.Types.ObjectId;
-  profileId: mongoose.Types.ObjectId;
-  roleId: mongoose.Types.ObjectId;
+  id: Types.ObjectId;
+  profileId: Types.ObjectId;
+  roleId: Types.ObjectId;
   isActive: boolean;
 };
 

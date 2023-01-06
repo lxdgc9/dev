@@ -14,6 +14,12 @@ app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Debug for development
+if (process.env.NODE_ENV === "development") {
+  logger.info("Running on development mode");
+  app.use(morgan("dev"));
+}
+
 // Init and connect to MongoDb
 dbDriver.init();
 dbDriver.connectDb(
@@ -23,12 +29,6 @@ dbDriver.connectDb(
   process.env.DB_USER as string,
   process.env.DB_PASS as string
 );
-
-// Debug for development
-if (process.env.NODE_ENV === "development") {
-  logger.info("Running on development mode");
-  app.use(morgan("dev"));
-}
 
 // Api routes
 app.use("/api", apiRouter);

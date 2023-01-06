@@ -1,15 +1,12 @@
-import express from "express";
+import { Request, Response } from "express";
 import { CreateCompanyDto } from "../../dtos/company/create-company-dto";
 import { CompanyModel } from "../../models/company-model";
 import { logger } from "../../utils/logger";
 
-async function createCompany(
-  req: express.Request,
-  res: express.Response
-): Promise<void> {
-  try {
-    const { name, logo }: CreateCompanyDto = req.body;
+async function createCompany(req: Request, res: Response) {
+  const { name, logo }: CreateCompanyDto = req.body;
 
+  try {
     // Create new company
     const newCompany = new CompanyModel({ name, logo });
     await newCompany.save();
@@ -17,15 +14,15 @@ async function createCompany(
     // Ok, send response
     res.status(201).json({
       status: true,
-      message: "Create comany success",
+      message: "Create Company Success",
       company: newCompany,
     });
   } catch (err) {
-    logger.error("create company error");
+    logger.error("Create company error");
     console.log(err);
     res.status(400).json({
       status: false,
-      message: "Create company failed",
+      message: "Create Company Failed",
     });
   }
 }

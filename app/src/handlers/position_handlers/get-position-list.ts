@@ -1,16 +1,13 @@
-import express from "express";
+import { Request, Response } from "express";
 import { PositionModel } from "../../models/position-model";
 import { logger } from "../../utils/logger";
 
-async function getPositonList(
-  _req: express.Request,
-  res: express.Response
-): Promise<void> {
+async function getPositonList(_req: Request, res: Response) {
   try {
     const positionList = await PositionModel.find({});
     res.status(200).json({
       status: true,
-      message: "Get position success",
+      message: "Get Position Success",
       positionList,
     });
   } catch (err) {
@@ -18,7 +15,7 @@ async function getPositonList(
     console.log(err);
     res.status(404).json({
       status: false,
-      message: "Get position failed",
+      message: "Get Position Failed",
     });
   }
 }

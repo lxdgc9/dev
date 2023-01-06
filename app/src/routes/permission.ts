@@ -1,18 +1,22 @@
-import express from "express";
+import { Router } from "express";
 import { PERMISSION_CODE } from "../constants/permission-code";
-import * as permissionHandler from "../handlers/permission_handlers";
+import {
+  getPermissionList,
+  getPermissionById,
+  createPermission,
+} from "../handlers/permission_handlers";
 import { accessRole } from "../middlewares/access-role";
 import { verifyToken } from "../middlewares/verify-token";
 
-const permissionRouter = express.Router();
+const router = Router();
 
-permissionRouter.get(
+router.get(
   "/",
   verifyToken,
   accessRole(PERMISSION_CODE.GET_USER, PERMISSION_CODE.CREATE_USER),
-  permissionHandler.getPermissionList
+  getPermissionList
 );
-permissionRouter.get("/:id", permissionHandler.getPermissionById);
-permissionRouter.post("/", permissionHandler.createPermission);
+router.get("/:id", getPermissionById);
+router.post("/", createPermission);
 
-export { permissionRouter };
+export { router as permissionRouter };

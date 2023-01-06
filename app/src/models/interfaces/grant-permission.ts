@@ -1,8 +1,8 @@
-import mongoose from "mongoose";
+import { Types } from "mongoose";
 
 interface IGrantPermission {
-  roleId: mongoose.Types.ObjectId;
-  permissionId: mongoose.Types.ObjectId;
+  role: Types.ObjectId;
+  permission: Types.ObjectId;
 }
 
 export { IGrantPermission };

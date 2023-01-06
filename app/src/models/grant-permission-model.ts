@@ -1,21 +1,24 @@
-import mongoose from "mongoose";
+import { Schema, model } from "mongoose";
 import { IGrantPermission } from "./interfaces/grant-permission";
 
-const grantPermissionSchema = new mongoose.Schema<IGrantPermission>({
-  roleId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Role",
-    required: true,
+// Define schema
+const schema = new Schema<IGrantPermission>(
+  {
+    role: {
+      type: Schema.Types.ObjectId,
+      ref: "role",
+      required: true,
+    },
+    permission: {
+      type: Schema.Types.ObjectId,
+      ref: "permission",
+      required: true,
+    },
   },
-  permissionId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Permission",
-    required: true,
-  },
-});
+  { collection: "Grant Permission", timestamps: true }
+);
 
-const GrantPermissionModel = mongoose.model<
-  IGrantPermission & mongoose.Document
->("Grant-Permission", grantPermissionSchema);
+// Create model
+const GrantPermissionModel = model("grant-permission", schema);
 
 export { GrantPermissionModel };

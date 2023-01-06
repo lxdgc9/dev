@@ -1,14 +1,19 @@
-import mongoose from "mongoose";
+import { Schema, model } from "mongoose";
 import { IRole } from "./interfaces/role";
 
-const roleSchema = new mongoose.Schema<IRole>({
-  name: {
-    type: String,
-    trim: true,
-    required: true,
+// Define schema
+const schema = new Schema<IRole>(
+  {
+    name: {
+      type: String,
+      trim: true,
+      required: true,
+    },
   },
-});
+  { collection: "Role", timestamps: true }
+);
 
-const RoleModel = mongoose.model<IRole & mongoose.Document>("Role", roleSchema);
+// Create model
+const RoleModel = model("role", schema);
 
 export { RoleModel };

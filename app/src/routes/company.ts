@@ -1,10 +1,14 @@
-import express from "express";
-import * as companyHandler from "../handlers/company_handlers";
+import { Router } from "express";
+import {
+  getCompanyList,
+  getCompanyById,
+  createCompany,
+} from "../handlers/company_handlers";
 
-const companyRouter = express.Router();
+const router = Router();
 
-companyRouter.get("/", companyHandler.getCompanyList);
-companyRouter.get("/:id", companyHandler.getCompanyById);
-companyRouter.post("/", companyHandler.createCompany);
+router.get("/", getCompanyList);
+router.get("/:id", getCompanyById);
+router.post("/", createCompany);
 
-export { companyRouter };
+export { router as companyRouter };
