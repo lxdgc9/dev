@@ -4,36 +4,39 @@ import { logger } from "../utils/logger";
 import { IUser } from "./interfaces/user";
 
 // Define schema
-const schema = new Schema<IUser>({
-  username: {
-    type: String,
-    trim: true,
-    lowercase: true,
-    unique: true,
-    required: true,
+const schema = new Schema<IUser>(
+  {
+    username: {
+      type: String,
+      trim: true,
+      lowercase: true,
+      unique: true,
+      required: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+    profile: {
+      type: Schema.Types.ObjectId,
+      ref: "profile",
+      required: true,
+    },
+    role: {
+      type: Schema.Types.ObjectId,
+      ref: "role",
+      required: true,
+    },
+    isActive: {
+      type: Boolean,
+      default: true,
+    },
   },
-  password: {
-    type: String,
-    required: true,
-  },
-  profile: {
-    type: Schema.Types.ObjectId,
-    ref: "Profile",
-    required: true,
-  },
-  role: {
-    type: Schema.Types.ObjectId,
-    ref: "Role",
-    required: true,
-  },
-  isActive: {
-    type: Boolean,
-    default: true,
-  },
-});
+  { collection: "User", timestamps: true }
+);
 
 // Middlewares
-schema.pre("save", async function (next): Promise<void> {
+schema.pre("save", async function (next) {
   try {
     let user = this;
     if (!user.isModified("password")) {

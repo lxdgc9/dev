@@ -20,7 +20,7 @@ const schema = new Schema<IProfile>(
     },
     position: {
       type: Schema.Types.ObjectId,
-      ref: "Position",
+      ref: "position",
       required: true,
     },
     phone: {

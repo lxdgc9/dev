@@ -17,7 +17,7 @@ function accessRole(...permissions: number[]) {
 
       // Get permissions list of user
       const permissionList = await GrantPermissionModel.find({
-        roleId: req.user.roleId,
+        role: req.user.roleId,
       });
       const permissionListPopulatePermission =
         await GrantPermissionModel.populate(permissionList, "permissionId");

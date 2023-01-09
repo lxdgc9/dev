@@ -30,7 +30,7 @@ async function login(req: Request, res: Response) {
         isActive: user.isActive,
       } as JwtPayload,
       process.env.SECRET_KEY as string,
-      { expiresIn: "2d" }
+      { expiresIn: "7d" }
     );
     res.status(200).json({
       status: true,

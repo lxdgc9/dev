@@ -6,7 +6,7 @@ async function getPermissionsOfRole(req: Request, res: Response) {
   try {
     // Get permissions of role
     const permissionIdListOfRole = await GrantPermissionModel.find({
-      roleId: req.params.roleId,
+      role: req.params.roleId,
     });
 
     // Populate permission list
