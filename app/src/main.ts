@@ -1,15 +1,22 @@
 import cors from "cors";
+import path from "path";
 import helmet from "helmet";
 import express from "express";
+import morgan from "morgan";
+import createError from "http-errors";
 import * as dbDriver from "./driver/mongo";
 import { apiRouter } from "./routes";
 import { logger } from "./utils/logger";
-import morgan from "morgan";
-import createError from "http-errors";
+import { corsWhiteList } from "./utils/cors-whitelist";
 
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: corsWhiteList(path.join(__dirname, "../whitelist")),
+    optionsSuccessStatus: 200,
+  })
+);
 app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

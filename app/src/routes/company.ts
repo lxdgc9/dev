@@ -4,11 +4,12 @@ import {
   getCompanyById,
   createCompany,
 } from "../handlers/company_handlers";
+import { uploader } from "../utils/uploader";
 
 const router = Router();
 
 router.get("/", getCompanyList);
 router.get("/:id", getCompanyById);
-router.post("/", createCompany);
+router.post("/", uploader.single("logo"), createCompany);
 
 export { router as companyRouter };
