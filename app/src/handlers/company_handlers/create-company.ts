@@ -1,26 +1,19 @@
 import { Request, Response } from "express";
-import { cloudinary } from "../../driver/cloudinary";
 import { CreateCompanyDto } from "../../dtos/company/create-company-dto";
 import { CompanyModel } from "../../models/company-model";
 import { logger } from "../../utils/logger";
+import { uploadFromBuffer } from "../../utils/upload-from-buffer";
 
 async function createCompany(req: Request, res: Response) {
   const { name }: CreateCompanyDto = req.body;
 
   try {
-    // Create new company
-    const newCompany = new CompanyModel({ name, logo: "hello world" });
-    await newCompany.save();
+    // Upload logo to cloud
+    const img = await uploadFromBuffer(req, { folder: "company" });
 
-    // Pass, upload image to cloud
-    const upload = await cloudinary.uploader.upload(
-      req.file?.buffer?.toString() || "",
-      {
-        public_id: "hello world 1",
-        resource_type: "image",
-      }
-    );
-    console.log(upload);
+    // Create new company
+    const newCompany = new CompanyModel({ name, logo: img.secure_url });
+    await newCompany.save();
 
     // Ok, send response
     res.status(201).json({
