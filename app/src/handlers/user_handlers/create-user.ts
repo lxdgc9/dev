@@ -8,32 +8,37 @@ import { logger } from "../../utils/logger";
 
 async function createUser(req: Request, res: Response) {
   try {
-    const { username, password, profile, roleId, isActive }: CreateUserDto =
-      req.body;
+    const {
+      username,
+      password,
+      profile: { name, dob, gender, positionId, phone, avatar },
+      roleId,
+      isActive,
+    }: CreateUserDto = req.body;
 
     // Create new profile and user async/await
-    let { name, dob, gender, positionId, phone, avatar } = profile;
+    let avatarUrl: string = "";
     if (!avatar) {
       const position = await PositionModel.findById(positionId);
       if (!position) {
         throw new Error("Invalid position");
       }
       const company = await CompanyModel.findById(position.company);
-      avatar = company ? company.logo : "/default-logo.png";
+      avatarUrl = company ? company.logo : "/default-logo.png";
     }
     const newProfile = new ProfileModel({
       name,
       dob,
       gender,
-      positionId,
+      position: positionId,
       phone,
-      avatar,
+      avatar: avatarUrl,
     });
     const newUser = new UserModel({
       username,
       password,
-      profileId: newProfile.id,
-      roleId,
+      profile: newProfile.id,
+      role: roleId,
       isActive,
     });
 

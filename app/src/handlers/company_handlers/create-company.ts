@@ -7,8 +7,6 @@ import { uploadFromBuffer } from "../../utils/upload-from-buffer";
 async function createCompany(req: Request, res: Response) {
   const { name, logo }: CreateCompanyDto = req.body;
 
-  console.log(req.body);
-
   try {
     // Create company and upload image by url
     if (logo) {

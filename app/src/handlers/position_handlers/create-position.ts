@@ -8,7 +8,7 @@ async function createPosition(req: Request, res: Response) {
 
   try {
     // Create new company
-    const newPosition = new PositionModel({ name, companyId });
+    const newPosition = new PositionModel({ name, company: companyId });
     await newPosition.save();
 
     // Ok, send response
