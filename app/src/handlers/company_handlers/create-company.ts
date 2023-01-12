@@ -5,38 +5,27 @@ import { logger } from "../../utils/logger";
 import { uploadFromBuffer } from "../../utils/upload-from-buffer";
 
 async function createCompany(req: Request, res: Response) {
-  const { name, logo }: CreateCompanyDto = req.body;
-
+  const { name }: CreateCompanyDto = req.body;
   try {
-    // Create company and upload image by url
-    if (logo) {
-      const newCompany = new CompanyModel({ name, logo });
-      await newCompany.save();
-
-      // Ok, send response
-      res.status(201).json({
-        status: true,
-        message: "Create Company Success",
-        company: newCompany,
-      });
-      return;
+    // Require file upload
+    if (!req.file) {
+      throw new Error("Require upload logo");
     }
-
-    // Upload logo to cloud
+    // Handle upload image to cloud
+    const newCompany = new CompanyModel();
     const img = await uploadFromBuffer(req, {
-      folder: "company",
+      folder: `company/${newCompany.id}`,
       resource_type: "image",
       transformation: {
         width: 400,
-        crop: "fill",
         gravity: "auto",
+        crop: "fill",
       },
     });
-
-    // Create new company
-    const newCompany = new CompanyModel({ name, logo: img.secure_url });
+    // Update document
+    newCompany.name = name;
+    newCompany.logo = img.secure_url;
     await newCompany.save();
-
     // Ok, send response
     res.status(201).json({
       status: true,
