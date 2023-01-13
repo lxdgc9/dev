@@ -1,14 +1,11 @@
 type CreateUserDto = {
   username: string;
   password: string;
-  profile: {
-    name: string;
-    dob: Date;
-    gender: string;
-    positionId: string;
-    phone: string;
-    avatar?: string;
-  };
+  name: string;
+  dob: Date;
+  gender: string;
+  positionId: string;
+  phone: string;
   roleId: string;
   isActive?: boolean;
 };

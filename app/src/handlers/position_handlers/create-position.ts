@@ -18,7 +18,7 @@ async function createPosition(req: Request, res: Response) {
       position: newPosition,
     });
   } catch (err) {
-    logger.error("create position error");
+    logger.error("Create position error");
     console.log(err);
     res.status(400).json({
       status: false,

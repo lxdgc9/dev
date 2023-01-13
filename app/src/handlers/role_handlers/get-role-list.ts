@@ -11,7 +11,7 @@ async function getRoleList(_req: Request, res: Response) {
       roleList,
     });
   } catch (err) {
-    logger.error("get role list error");
+    logger.error("Get role list error");
     console.log(err);
     res.status(404).json({
       status: false,

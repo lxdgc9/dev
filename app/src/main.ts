@@ -42,7 +42,7 @@ app.use("/api", apiRouter);
 
 // Error handling
 app.use((_req, _res, next) => {
-  next(createError[400]);
+  next(createError(401, "Please login to view this page."));
 });
 
 app.listen(8000, () => logger.info("The server is running"));

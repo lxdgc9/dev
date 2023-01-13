@@ -1,39 +1,67 @@
 import { Request, Response } from "express";
+import { cloudinary } from "../../driver/cloudinary";
 import { CreateUserDto } from "../../dtos/user/create-user-dto";
 import { CompanyModel } from "../../models/company-model";
 import { PositionModel } from "../../models/position-model";
 import { ProfileModel } from "../../models/profile-model";
 import { UserModel } from "../../models/user-model";
 import { logger } from "../../utils/logger";
+import { uploadFromBuffer } from "../../utils/upload-from-buffer";
 
 async function createUser(req: Request, res: Response) {
   try {
     const {
       username,
       password,
-      profile: { name, dob, gender, positionId, phone, avatar },
+      name,
+      dob,
+      gender,
+      positionId,
+      phone,
       roleId,
       isActive,
     }: CreateUserDto = req.body;
 
-    // Create new profile and user async/await
-    let avatarUrl: string = "";
-    if (!avatar) {
-      const position = await PositionModel.findById(positionId);
-      if (!position) {
-        throw new Error("Invalid position");
-      }
-      const company = await CompanyModel.findById(position.company);
-      avatarUrl = company ? company.logo : "/default-logo.png";
-    }
+    // Handle upload avatar
+    let avatar: string = "";
     const newProfile = new ProfileModel({
       name,
       dob,
       gender,
       position: positionId,
       phone,
-      avatar: avatarUrl,
+      avatar,
     });
+    if (req.file) {
+      const img = await uploadFromBuffer(req, {
+        folder: `profile/${newProfile.id}`,
+        resource_type: "image",
+        transformation: {
+          width: 400,
+          gravity: "auto",
+          crop: "fill",
+        },
+      });
+      avatar = img.secure_url;
+    } else {
+      const position = await PositionModel.findById(positionId);
+      const company = await CompanyModel.findById(position?.company);
+      if (!company) {
+        throw new Error("Company not found");
+      }
+      const img = await cloudinary.uploader.upload(company.logo as string, {
+        folder: `profile/${newProfile.id}`,
+        resource_type: "image",
+        transformation: {
+          width: 400,
+          gravity: "auto",
+          crop: "fill",
+        },
+      });
+      avatar = img.secure_url;
+    }
+    newProfile.avatar = avatar;
+
     const newUser = new UserModel({
       username,
       password,
@@ -43,8 +71,8 @@ async function createUser(req: Request, res: Response) {
     });
 
     // Save
-    await newUser.save();
     await newProfile.save();
+    await newUser.save();
 
     // Ok, send response
     res.status(201).json({
