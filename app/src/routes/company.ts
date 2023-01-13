@@ -13,7 +13,7 @@ const router = Router();
 router.get("/", getCompanyList);
 router.get("/:id", getCompanyById);
 router.post("/", uploader.single("logo"), createCompany);
-router.put('/:id', uploader.single('logo'), updateCompanyById);
-router.delete('/:id', deleteCompanyById);
+router.put("/:id", uploader.single("logo"), updateCompanyById);
+router.delete("/:id", deleteCompanyById);
 
 export { router as companyRouter };

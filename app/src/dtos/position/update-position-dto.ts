@@ -1,6 +1,6 @@
 type UpdatePositionDto = {
   name?: string;
-  companyId: string;
+  companyId?: string;
 };
 
 export { UpdatePositionDto };

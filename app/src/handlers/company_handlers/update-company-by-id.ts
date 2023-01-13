@@ -7,15 +7,19 @@ import { uploadFromBuffer } from "../../utils/upload-from-buffer";
 type UpdatePayload = {
   name?: string;
   logo?: string;
-}
+};
 
 async function updateCompanyById(req: Request, res: Response) {
   const { name }: UpdateCompanyDto = req.body;
+
   try {
+    // Check company id
     let company = await CompanyModel.findById(req.params.id);
     if (!company) {
       throw new Error("Company not found");
     }
+
+    // Handle get image url
     let updatePayload: UpdatePayload = { name };
     if (req.file) {
       const img = await uploadFromBuffer(req, {
@@ -32,6 +36,7 @@ async function updateCompanyById(req: Request, res: Response) {
         logo: img.secure_url,
       };
     }
+
     // Ok, update, save and send response
     await company.updateOne(updatePayload);
     await company.save();

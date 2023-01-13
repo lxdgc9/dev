@@ -10,15 +10,20 @@ function verifyToken(
   next: express.NextFunction
 ) {
   try {
+    // Get header Authorization
     const headerAssertion = req.header("authorization") as string;
     if (!headerAssertion) {
       throw new Error("No authorization header");
     }
+
+    // Decode token
     const token = headerAssertion.split("Bearer ")[1];
     const decoded = jwt.verify(
       token,
       process.env.SECRET_KEY as string
     ) as JwtPayload;
+
+    // Ok, set token payload to req.user and next
     req.user = decoded;
     next();
   } catch (err) {

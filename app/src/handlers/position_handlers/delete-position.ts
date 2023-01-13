@@ -5,7 +5,6 @@ import { logger } from "../../utils/logger";
 async function deletePositionById(req: Request, res: Response) {
   try {
     await PositionModel.findByIdAndDelete(req.params.id);
-    // Ok, send response
     res.status(200).json({
       status: true,
       message: "Delete Position Success",

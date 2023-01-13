@@ -7,7 +7,6 @@ async function createRole(req: Request, res: Response) {
   const { name }: CreateRoleDto = req.body;
 
   try {
-    // Create new role
     const newRole = new RoleModel({ name });
     await newRole.save();
 

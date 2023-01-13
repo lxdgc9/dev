@@ -10,7 +10,7 @@ cloudinary.config({
 
 cloudinary.api
   .ping()
-  .then((res) => logger.info(`Cloudinary connection ${res.status}`))
+  .then((res) => logger.info(`Cloudinary connection: ${res.status}`))
   .catch((err) => {
     logger.error("Cloudinary connection failed");
     console.log(err);
