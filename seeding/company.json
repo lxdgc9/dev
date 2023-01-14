@@ -1,0 +1,18 @@
+[{
+  "_id": {
+    "$oid": "63c21393a4753c1fee58fb10"
+  },
+  "name": "Công ty TNHH Công nghệ – Thiết bị – Giáo dục Song Phương",
+  "logo": "https://res.cloudinary.com/dj7btad71/image/upload/v1673663383/company/63c21393a4753c1fee58fb10/qsruo1wmpmfhtddne8hb.png",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1673663381954"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1673663381954"
+    }
+  },
+  "__v": 0
+}]

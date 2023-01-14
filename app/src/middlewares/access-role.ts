@@ -19,19 +19,20 @@ function accessRole(...permissions: number[]) {
       const permissionList = await GrantPermissionModel.find({
         role: req.user.roleId,
       });
+      console.log(permissionList);
       const permissionListPopulatePermission =
-        await GrantPermissionModel.populate(permissionList, "permissionId");
+        await GrantPermissionModel.populate(permissionList, "permission");
 
       //
-      console.log(permissionListPopulatePermission);
-      console.log(permissions);
+      // console.log(permissionListPopulatePermission);
+      // console.log(permissions);
       next();
     } catch (err) {
       logger.error("Access role error");
       console.log(err);
       res.status(401).json({
         status: false,
-        message: "Unauthorized",
+        message: "Permission Denied",
       });
     }
   };

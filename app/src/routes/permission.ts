@@ -14,7 +14,7 @@ const router = Router();
 router.get(
   "/",
   // verifyToken,
-  // accessRole(PERMISSION_CODE.GET_USER, PERMISSION_CODE.CREATE_USER),
+  // accessRole(PERMISSION_CODE.READ_PERMISSION),
   getPermissionList
 );
 router.get("/:id", getPermissionById);

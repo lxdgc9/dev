@@ -38,17 +38,17 @@ services:
       - bridge
     volumes:
       - ./db:/data/db:rw
-  dbseed:
-    build: ./seeding
-    environment:
-      - DB_HOST=db
-      - DB_NAME=chatgdvn
-      - DB_USER=${MONGO_ROOT_USER}
-      - DB_PASS=${MONGO_ROOT_PASS}
-    networks:
-      - bridge
-    depends_on:
-      - db
+  # dbseed:
+  #   build: ./seeding
+  #   environment:
+  #     - DB_HOST=db
+  #     - DB_NAME=chatgdvn
+  #     - DB_USER=${MONGO_ROOT_USER}
+  #     - DB_PASS=${MONGO_ROOT_PASS}
+  #   networks:
+  #     - bridge
+  #   depends_on:
+  #     - db
 networks:
   bridge:
     name: linking

@@ -3,9 +3,8 @@
 mongoimport \
   -h $DB_HOST -d $DB_NAME -u $DB_USER -p $DB_PASS -c "Company" \
   --authenticationDatabase admin \
-	--type csv \
-	--file ./company.csv \
-	--headerline
+  --jsonArray \
+	--file ./company.json
 
 mongoimport \
   -h $DB_HOST -d $DB_NAME -u $DB_USER -p $DB_PASS -c "Grant Permission" \

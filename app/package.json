@@ -6,7 +6,7 @@
   "scripts": {
     "beauty": "prettier --write .",
     "build": "tsc",
-    "start": "node dist/main.ts",
+    "start": "node dist/main.js",
     "dev": "nodemon src/main.ts"
   },
   "dependencies": {
