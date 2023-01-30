@@ -1,19 +1,21 @@
 import cors from "cors";
-import path from "path";
-import helmet from "helmet";
 import express from "express";
-import morgan from "morgan";
+import helmet from "helmet";
+import { createServer } from "http";
 import createError from "http-errors";
+import morgan from "morgan";
 import * as dbDriver from "./driver/mongo";
 import { apiRouter } from "./routes";
+import { createSocket } from "./socket/init";
+import { whitelist } from "./utils/cors-whitelist";
 import { logger } from "./utils/logger";
-import { corsWhiteList } from "./utils/cors-whitelist";
 
 const app = express();
+const server = createServer(app);
 
 app.use(
   cors({
-    origin: corsWhiteList(path.join(__dirname, "../whitelist")),
+    origin: whitelist,
     optionsSuccessStatus: 200,
   })
 );
@@ -40,9 +42,13 @@ dbDriver.connectDb(
 // Api routes
 app.use("/api", apiRouter);
 
+// Create socket server
+createSocket(server);
+
 // Error handling
 app.use((_req, _res, next) => {
   next(createError(401, "Please login to view this page."));
 });
 
-app.listen(8000, () => logger.info("The server is running"));
+// Start http server
+server.listen(8000, () => logger.info("The server is running"));

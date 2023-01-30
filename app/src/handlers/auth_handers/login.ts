@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import jwt from "jsonwebtoken";
+import { sign } from "jsonwebtoken";
 import { JwtPayload } from "../../@types/jwt-payload";
 import { LoginDto } from "../../dtos/auth/login-dto";
 import { UserModel } from "../../models/user-model";
@@ -22,7 +22,7 @@ async function login(req: Request, res: Response) {
     }
 
     // Ok, create token and send response
-    const token = jwt.sign(
+    const token = sign(
       {
         id: user.id,
         profileId: user.profile,

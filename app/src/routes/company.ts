@@ -1,10 +1,10 @@
 import { Router } from "express";
 import {
-  getCompanyList,
-  getCompanyById,
   createCompany,
-  updateCompanyById,
   deleteCompanyById,
+  getCompanyById,
+  getCompanyList,
+  updateCompanyById,
 } from "../handlers/company_handlers";
 import { uploader } from "../utils/uploader";
 

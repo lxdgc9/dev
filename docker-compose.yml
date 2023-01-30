@@ -1,7 +1,7 @@
 version: "3"
 
 services:
-  api:
+  app:
     build: ./app
     command: yarn dev
     restart: unless-stopped

@@ -4,10 +4,10 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "beauty": "prettier --write .",
     "build": "tsc",
     "start": "node dist/main.js",
-    "dev": "nodemon src/main.ts"
+    "dev": "nodemon src/main.ts",
+    "beauty": "prettier --write ."
   },
   "dependencies": {
     "bcrypt": "^5.1.0",
@@ -20,6 +20,7 @@
     "mongoose": "^6.8.0",
     "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.1",
+    "socket.io": "^4.5.4",
     "streamifier": "^0.1.1",
     "winston": "^3.8.2",
     "winston-daily-rotate-file": "^4.7.1"

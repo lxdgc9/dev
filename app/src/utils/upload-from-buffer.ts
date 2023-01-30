@@ -1,7 +1,7 @@
-import { Request } from "express";
-import { cloudinary } from "../driver/cloudinary";
-import { createReadStream } from "streamifier";
 import { UploadApiOptions, UploadApiResponse } from "cloudinary";
+import { Request } from "express";
+import { createReadStream } from "streamifier";
+import { cloudinary } from "../driver/cloudinary";
 
 function uploadFromBuffer(
   req: Request,

@@ -1,15 +1,15 @@
 import fs from "fs";
+import path from "path";
 import { logger } from "./logger";
 
-function corsWhiteList(filename: string) {
-  if (!fs.existsSync(filename)) {
-    logger.warn("Whitelist not found, use allow origin: all");
-    return "*";
-  }
+const FILENAME = path.join(__dirname, "../whitelist");
 
-  logger.debug("Whitelist enabled");
-  const whitelist = fs.readFileSync(filename).toString("utf8").split("\n");
-  return whitelist;
+let whitelist: string[] | "*" = "*";
+
+if (!fs.existsSync(FILENAME)) {
+  logger.warn("Whitelist not found, use allow origin: all");
+} else {
+  whitelist = fs.readFileSync(FILENAME).toString("utf8").split("\n");
 }
 
-export { corsWhiteList };
+export { whitelist };

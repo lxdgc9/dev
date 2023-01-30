@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt";
-import { Schema, model } from "mongoose";
+import { model, Schema } from "mongoose";
 import { logger } from "../utils/logger";
 import { IUser } from "./interfaces/user";
 
